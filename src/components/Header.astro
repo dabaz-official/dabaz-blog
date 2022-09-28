@@ -1,0 +1,29 @@
+---
+import { HOMEPAGE_URL } from '../config';
+import HeaderLink from './HeaderLink.astro';
+import { SiTwitter, SiGithub } from "react-icons/si";
+import DabAZIcon from './icons/dabaz';
+import ThemeToggle from './ThemeToggleButton';
+---
+
+<header class="fixed w-full z-20 backdrop-blur-lg">
+	<div class="mx-auto max-w-3xl">
+		<nav class="flex items-center gap-3 text-base">
+			<a href="/" class="group">
+				<div class="p-2 flex align-middle">
+					<DabAZIcon />
+					<h2 class="font-bold tracking-tighter p-2 text-md">
+						DabAZ
+					</h2>
+				</div>
+			</a>
+			<div class="items-center gap-6 hidden md:flex">
+				<HeaderLink href={HOMEPAGE_URL}>About</HeaderLink>
+				<HeaderLink class="flex" href="https://twitter.com/dabaz_official" target="_blank"><SiTwitter className="mt-1 mr-1" />Twitter</HeaderLink>
+				<HeaderLink class="flex" href="https://github.com/dabaz-official" target="_blank"><SiGithub className="mt-1 mr-1" />GitHub</HeaderLink>
+			</div>
+			<div class="flex-1"></div>
+			<ThemeToggle client:visible />
+		</nav>
+	</div>
+</header>

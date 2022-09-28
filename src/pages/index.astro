@@ -1,0 +1,64 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Body from '../components/Body.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, HOMEPAGE_URL } from '../config';
+import Content from '../components/Content.astro';
+import { BiChevronRight } from 'react-icons/bi';
+import Masthead from '../components/Masthead.astro';
+import { Image } from '@astrojs/image/components';
+
+const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<Body>
+		<Header title={SITE_TITLE} />
+		<Masthead />
+		<main class="pt-[56px]">
+			<Content>
+				<section>
+					<p class="mb-8 indent-4">
+						As a ethical hacker, I&apos;ve been spending hours and hours to study cyber security and ethical hacking. I also took down so many notes about cyber security. Here are some notes of mine. These notes follow a 
+						<a href="https://github.com/ffffffff0x/1earn/blob/master/roadmap.md" class="text-blue-500 dark:text-blue-400" target="_blank">roadmap</a>.
+						<a class="inline-flex items-center indent-1 text-blue-500 dark:text-blue-400" href={HOMEPAGE_URL}>
+							Learn more about me
+							<BiChevronRight className="inline h-6 w-6" />
+						</a>
+					</p>
+				</section>
+				<section>
+					<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+						{
+							posts.map(post => (
+								<li class="text-center mb-4">
+									<a href={post.url}>
+										<Image class="border border-slate-300 dark:border-gray-700 rounded-2xl" src={post.frontmatter.heroImage} width={720*2} aspectRatio={2.0} alt="Thumbnail" />
+										<div class="mt-3 text-xl font-bold">
+											{post.frontmatter.title}
+										</div>
+										{post.frontmatter.description && (
+											<div class="opacity-70">
+												{post.frontmatter.description}
+											</div>
+										)}
+									</a>	
+								</li>
+							))
+						}
+					</ul>
+				</section>
+			</Content>
+		</main>
+		<Footer />
+	</Body>
+</html>
