@@ -5,7 +5,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION, HOMEPAGE_URL } from '../config';
 import Content from '../components/Content.astro';
-import { BiChevronRight } from 'react-icons/bi';
 import Masthead from '../components/Masthead.astro';
 import { Image } from '@astrojs/image/components';
 
@@ -32,7 +31,9 @@ const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
 						<a href="https://github.com/ffffffff0x/1earn/blob/master/roadmap.md" class="text-blue-500 dark:text-blue-400" target="_blank">roadmap</a>.
 						<a class="inline-flex items-center indent-1 text-blue-500 dark:text-blue-400" href={HOMEPAGE_URL}>
 							Learn more about me
-							<BiChevronRight className="inline h-6 w-6" />
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="inline -ml-1">
+								<path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"></path>
+							</svg>
 						</a>
 					</p>
 				</section>
