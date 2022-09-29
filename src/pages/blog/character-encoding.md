@@ -106,8 +106,8 @@ Unicode标准也在不断发展，但最常用的是UCS-16编码，用两个字�
 
 <style>
   code {
-    color: #f87171;
-    background-color: #282A36;
+    color: #F78C6C;
+    background-color: #292D3E;
     padding: 0.1rem 0.25rem;
     border-radius: 0.36rem;
     margin: 0 0.2rem;

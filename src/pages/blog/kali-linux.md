@@ -99,3 +99,13 @@ All that is left now to do is press “Start”.
 After all this is done, we save, start up the VM, and then continue installing Kali Linux as we normally would for a [bare metal install](https://www.kali.org/docs/installation/hard-disk-install/).
 
 During Kali Linux setup process, the [install wizard](https://gitlab.com/kalilinux/build-scripts/live-build-config/-/blob/master/simple-cdd/profiles/offline.downloads) should **detect if its inside a VM**. If it is, should then **automatically install any additional tools** (such as `virtualbox-guest-x11`) to give a better user experience.
+
+<style>
+  code {
+    color: #F78C6C;
+    background-color: #292D3E;
+    padding: 0.1rem 0.25rem;
+    border-radius: 0.36rem;
+    margin: 0 0.2rem;
+  }
+</style>
