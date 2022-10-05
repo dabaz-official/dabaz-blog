@@ -3,6 +3,8 @@ layout: "../../layouts/BlogPost.astro"
 title: "Kali inside VirtualBox"
 description: "Virtualizing Kali Linux inside of VirtualBox"
 pubDate: "Sep 08 2022"
+tags:
+  - Primer
 heroImage: "/blog/kali-linux/kali.webp"
 ---
 

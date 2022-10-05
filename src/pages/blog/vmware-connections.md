@@ -3,6 +3,8 @@ layout: "../../layouts/BlogPost.astro"
 title: "The connections in VMware"
 description: "The difference between them"
 pubDate: "Sep 10 2022"
+tags:
+  - Primer
 heroImage: "/blog/vmware-connections/vmware-workstation-pro-16.jpg"
 ---
 

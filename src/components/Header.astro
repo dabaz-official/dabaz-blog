@@ -3,6 +3,7 @@ import { HOMEPAGE_URL } from '../config';
 import HeaderLink from './HeaderLink.astro';
 import DabAZIcon from './icons/dabaz';
 import ThemeToggle from './ThemeToggleButton';
+import DropdownMenu from './DropdownMenu';
 ---
 
 <header class="fixed w-full z-20 backdrop-blur-lg">
@@ -33,6 +34,7 @@ import ThemeToggle from './ThemeToggleButton';
 			</div>
 			<div class="flex-1"></div>
 			<ThemeToggle client:visible />
+			<DropdownMenu client:visible />
 		</nav>
 	</div>
 </header>

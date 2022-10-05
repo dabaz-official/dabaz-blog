@@ -3,6 +3,8 @@ layout: "../../layouts/BlogPost.astro"
 title: "Strings in Python"
 description: "About encoding in Python"
 pubDate: "Sep 13 2022"
+tags:
+  - Dev Basics
 heroImage: "/blog/strings-in-python/strings-in-python-hero.png"
 ---
 

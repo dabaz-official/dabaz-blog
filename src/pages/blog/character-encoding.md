@@ -3,6 +3,8 @@ layout: "../../layouts/BlogPost.astro"
 title: "Character Encoding"
 description: "A brief intro of character encoding"
 pubDate: "Sep 12 2022"
+tags:
+  - Dev Basics
 heroImage: "/blog/character-encoding/character-encoding-hero.png"
 ---
 

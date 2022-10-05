@@ -35,7 +35,7 @@ export default defineConfig({
           tr: 'border',
           th: 'sticky z-10 top-0 text-md leading-6 font-semibold p-0 text-gray-500 dark:bg-slate-900 dark:text-slate-100 py-2 pr-2 border',
           td: 'border',
-          pre: 'rounded-md px-2 py-2 mb-4',
+          pre: 'rounded-sm px-2 py-2 mb-4',
         }
       ]
     ]

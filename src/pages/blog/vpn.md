@@ -3,6 +3,8 @@ layout: "../../layouts/BlogPost.astro"
 title: "科学上网指南"
 description: "关于科学上网的一切"
 pubDate: "Sep 11 2022"
+tags:
+  - Primer
 heroImage: "/blog/vpn/vpn-hero.webp"
 ---
 

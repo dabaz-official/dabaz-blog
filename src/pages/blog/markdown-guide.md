@@ -3,6 +3,8 @@ layout: "../../layouts/BlogPost.astro"
 title: "Markdown Guide"
 description: "How to take Markdown notes"
 pubDate: "Sep 09 2022"
+tags:
+  - Primer
 heroImage: "/blog/markdown-guide/markdown-guide-hero.png"
 ---
 
