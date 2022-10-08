@@ -5,7 +5,7 @@ description: "The basics of Git"
 pubDate: "Sep 15 2022"
 tags:
   - Dev Basics
-heroImage: "/blog/git-intro/git-intro.png"
+heroImage: "/blog/git-basics/git-basics.png"
 ---
 
 # 概述
@@ -155,6 +155,156 @@ git revert 命令还有两个参数。
 --no-commit # 只抵消暂存区和工作区的文件变化，不产生新的提交。
 ```
 
+### 丢弃提交
+
+如果希望以前的提交在历史中彻底消失，而不是被抵消掉，可以使用 `git reset` 命令，丢弃掉某个提交之后的所有提交。
+
+```
+git reset [last good SHA]
+```
+
+`git reset` 的原理是，让最新提交的指针回到以前某个时点，该时点之后的提交都从历史中消失。
+
+默认情况下，`git reset` 不改变工作区的文件（但会改变暂存区），`--hard` 参数可以让工作区里面的文件也回到以前的状态。
+
+```
+git reset --hard [last good SHA]
+```
+
+执行 `git reset` 命令之后，如果想找回那些丢弃掉的提交，可以使用 `git reflog` 命令，具体做法参考这里。不过，这种做法有时效性，时间长了可能找不回来。
+
+### **替换上一次提交**
+
+提交以后，发现提交信息写错了，这时可以使用 `git commit` 命令的 `--amend` 参数，可以修改上一次的提交信息。
+
+```
+git commit --amend -m "Fixes bug #42"
+```
+
+它的原理是产生一个新的提交对象，替换掉上一次提交产生的提交对象。
+
+这时如果暂存区有发生变化的文件，会一起提交到仓库。所以，`--amend` 不仅可以修改提交信息，还可以整个把上一次提交替换掉。
+
+### 修改上一次的commit
+
+```
+git commit --amend
+```
+
+### 撤销工作区的文件修改
+
+如果工作区的某个文件被改乱了，但还没有提交，可以用 `git checkout` 命令找回本次修改之前的文件。
+
+```
+git checkout -- [filename]
+```
+
+它的原理是先找暂存区，如果该文件有暂存的版本，则恢复该版本，否则恢复上一次提交的版本。
+
+注意，工作区的文件变化一旦被撤销，就无法找回了。
+
+### 从暂存区撤销文件
+
+如果不小心把一个文件添加到暂存区，可以用下面的命令撤销。
+
+```
+git rm --cached [filename]
+```
+
+上面的命令不影响已经提交的内容。
+
+### 撤销当前分支的变化
+
+你在当前分支上做了几次提交，突然发现放错了分支，这几个提交本应该放到另一个分支。
+
+```
+# 新建一个 feature 分支，指向当前最新的提交
+# 注意，这时依然停留在当前分支
+git branch feature
+
+# 切换到这几次提交之前的状态
+git reset --hard [当前分支此前的最后一次提交]
+
+# 切换到 feature 分支
+git checkout feature
+```
+
+上面的操作等于是撤销当前分支的变化，将这些变化放到一个新建的分支。
+
+## 跳转
+
+```
+git log # 查看 commit 历史
+
+git checkout xxxxxxxx # 跳转到指定的 commit 版本中
+```
+
+## 子模块
+
+有种情况经常会遇到：某个工作中的项目需要包含并使用另一个项目。也许是第三方库，或者你独立开发的，用于多个父项目的库。
+
+现在问题来了：你想要把它们当做两个独立的项目，同时又想在一个项目中使用另一个。
+
+假设你正在开发一个网站然后创建了 Atom 订阅。 你决定使用一个库，而不是写自己的 Atom 生成代码。你可能不得不通过 CPAN 安装或 Ruby gem 来包含共享库中的代码，或者将源代码直接拷贝到自己的项目中。如果将这个库包含进来，那么无论用何种方式都很难定制它，部署则更加困难，因为你必须确保每一个客户端都包含该库。 如果将代码复制到自己的项目中，那么你做的任何自定义修改都会使合并上游的改动变得困难。
+
+Git 通过子模块来解决这个问题。子模块允许你将一个 Git 仓库作为另一个 Git 仓库的子目录。它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。
+
+```
+git submodule add https://github.com/No-Github/1earn # 添加一个名为 1earn 的库
+
+# 默认情况下，子模块会将子项目放到一个与仓库同名的目录中，本例中是 1earn , 如果你想要放到其他地方，那么可以在命令结尾添加一个不同的路径。
+```
+
+运行 git status
+
+```
+git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   .gitmodules
+        new file:   1earn
+```
+
+首先应当注意到新的 .gitmodules 文件。 该配置文件保存了项目 URL 与已经拉取的本地目录之间的映射：
+
+```
+[submodule "1earn"]
+	path = 1earn
+	url = https://github.com/No-Github/1earn
+```
+
+如果有多个子模块，该文件中就会有多条记录。 要重点注意的是，该文件也像 .gitignore 文件一样受到（通过）版本控制。 它会和该项目的其他部分一同被拉取推送。 这就是克隆该项目的人知道去哪获得子模块的原因。
+
+当你提交时，会看到类似下面的信息：
+
+```
+git commit -m "test add module"
+[master e214ed0] test add module
+ 2 files changed, 4 insertions(+)
+ create mode 100644 .gitmodules
+ create mode 160000 1earn
+# 注意 1earn 记录的 160000 模式。 这是 Git 中的一种特殊模式，它本质上意味着你是将一次提交记作一项目录记录的，而非将它记录成一个子目录或者一个文件。
+```
+
+最后，推送这些更改：
+
+```
+git push origin master
+```
+
+## 大小写
+
+git 默认对于文件名大小写是不敏感的,所以你修改了首字母大写,但是 git 并没有发现代码任何改动。
+
+可以配置 git 使其对文件名大小写敏感：
+
+```
+git config core.ignorecase false
+```
 
 <style>
   ul {

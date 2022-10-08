@@ -37,6 +37,9 @@ export default function DropdownMenu() {
             <DropdownMenuItem href="/categories/dev-basics">
               Dev Basics
             </DropdownMenuItem>
+            <DropdownMenuItem href="/categories/web-basics">
+              Web Basics
+            </DropdownMenuItem>
           </div>
         </Menu.Items>
       </Transition>
