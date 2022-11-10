@@ -108,7 +108,7 @@ When a client wants to communicate with a server, either the final server or an 
 
 2. Send an HTTP message: HTTP messages (before HTTP/2) are human-readable. With HTTP/2, these simple messages are encapsulated in frames, making them impossible to read directly, but the principle remains the same. For example:
 
-```http
+```
 GET / HTTP/1.1
 Host: developer.mozilla.org
 Accept-Language: fr
@@ -116,7 +116,7 @@ Accept-Language: fr
 
 3. Read the response sent by the server, such as:
 
-```http
+```
 HTTP/1.1 200 OK
 Date: Sat, 09 Oct 2010 14:28:02 GMT
 Server: Apache
